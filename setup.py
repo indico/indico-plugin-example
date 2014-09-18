@@ -11,4 +11,5 @@ setup(
     install_requires=[
         'indico>=1.9'
     ],
+    entry_points={'indico.plugins': {'example = indico_example:ExamplePlugin'}}
 )

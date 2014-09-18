@@ -3,6 +3,7 @@ from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
 from indico.web.flask.util import url_for
 
 # TODO: assets
+# TODO: settings
 # TODO: database
 
 
