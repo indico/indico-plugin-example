@@ -1,5 +1,4 @@
 from flask_pluginengine import render_plugin_template, current_plugin, with_plugin_context
-from indico.core import signals
 
 from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
 from MaKaC.webinterface.rh.base import RH
@@ -11,6 +10,11 @@ from MaKaC.webinterface.pages.main import WPMainBase
 
 
 class ExamplePlugin(IndicoPlugin):
+    """Example Plugin
+
+    An example plugin that demonstrates the capabilities of the new Indico plugin system.
+    """
+
     def init(self):
         super(ExamplePlugin, self).init()
         self.inject_css('global_css')
