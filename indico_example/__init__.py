@@ -1,12 +1,18 @@
 from flask_pluginengine import render_plugin_template, current_plugin, with_plugin_context
+from wtforms import StringField, BooleanField
 
 from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
+from indico.modules.rb.forms.base import IndicoForm
 from MaKaC.webinterface.rh.base import RH
 from MaKaC.webinterface.pages.main import WPMainBase
 
 
-# TODO: settings
 # TODO: database
+
+
+class SettingsForm(IndicoForm):
+    dummy_message = StringField('Dummy Message')
+    show_message = BooleanField('Show Message')
 
 
 class ExamplePlugin(IndicoPlugin):
@@ -14,6 +20,8 @@ class ExamplePlugin(IndicoPlugin):
 
     An example plugin that demonstrates the capabilities of the new Indico plugin system.
     """
+
+    settings_form = SettingsForm
 
     def init(self):
         super(ExamplePlugin, self).init()
@@ -29,6 +37,8 @@ class ExamplePlugin(IndicoPlugin):
         def example():
             """Example command from example plugin"""
             print 'example plugin says hi', current_plugin
+            if self.settings.get('show_message'):
+                print self.settings.get('dummy_message')
 
     def extend_shell_context(self, add_to_context):
         add_to_context('bar', name='foo', doc='foobar from example plugin', color='magenta!')
