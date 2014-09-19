@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ plugin_js_assets('example_js') }}
+    {{ plugin_css_assets('example_css') }}
+{% endblock %}
+
+{% block body %}
+    <div class="foo"><div class="bar">hello world</div></div>
+    <div class="moo"></div>
+{% endblock %}

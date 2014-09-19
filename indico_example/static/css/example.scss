@@ -1,0 +1,15 @@
+@import "base/palette";
+
+.foo {
+    background-color: $dark-yellow;
+
+    .bar {
+        color: #f00 !important;
+        font-size: 24px;
+    }
+}
+
+.moo {
+    background-image: url(../images/cat.jpg);
+    height: 541px;
+}

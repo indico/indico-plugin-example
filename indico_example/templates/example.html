@@ -1,0 +1,9 @@
+{{ plugin_js_assets('example_js') }}
+{{ plugin_css_assets('example_css') }}
+
+Example says hello.
+<div id="jsmsg"></div>
+<br>
+<img src="{{ url_for('example.static', filename='images/cat.jpg') }}" alt="meow">
+<div class="foo"><div class="bar">hello world</div></div>
+<div class="moo"></div>

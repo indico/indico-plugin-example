@@ -1,35 +1,59 @@
+from flask_pluginengine import render_plugin_template, current_plugin, with_plugin_context
 from indico.core import signals
-from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
-from indico.web.flask.util import url_for
 
-# TODO: assets
+from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
+from MaKaC.webinterface.rh.base import RH
+from MaKaC.webinterface.pages.main import WPMainBase
+
+
 # TODO: settings
 # TODO: database
 
 
 class ExamplePlugin(IndicoPlugin):
     def init(self):
-        signals.cli.connect(self.add_cli_command)
-        signals.shell_context.connect(self.extend_shell_context)
-        signals.get_blueprints.connect(self.get_blueprints)
+        super(ExamplePlugin, self).init()
+        self.inject_css('global_css')
+        self.inject_js('global_js')
+
+    def get_blueprints(self):
+        return blueprint
 
     def add_cli_command(self, manager):
         @manager.command
+        @with_plugin_context(self)
         def example():
             """Example command from example plugin"""
-            print 'example plugin says hi'
+            print 'example plugin says hi', current_plugin
 
-    def extend_shell_context(self, sender, add_to_context):
+    def extend_shell_context(self, add_to_context):
         add_to_context('bar', name='foo', doc='foobar from example plugin', color='magenta!')
 
-    def get_blueprints(self, app):
-        return blueprint
+    def register_assets(self):
+        self.register_js_bundle('example_js', 'js/example.js')
+        self.register_js_bundle('global_js', 'js/global.js')
+        self.register_css_bundle('example_css', 'css/example.scss')
+        self.register_css_bundle('global_css', 'css/global.scss')
 
 
 blueprint = IndicoPluginBlueprint('example', __name__)
 
 
-@blueprint.route('/example')
-def example():
-    return 'example blueprint says hi<br>' \
-           '<a href="{0}">{0}</a>'.format(url_for('example.static', filename='images/cat.jpg'))
+class WPExample(WPMainBase):
+    def _getBody(self, params):
+        return render_plugin_template('example.html', **params)
+
+
+class RHExample(RH):
+    def _process(self):
+        return WPExample(self, foo=u'bar').display()
+
+
+class RHTest(RH):
+    def _process(self):
+        return render_plugin_template('test.html')
+
+
+blueprint.add_url_rule('/example', 'example', view_func=RHExample)
+blueprint.add_url_rule('/example/x', 'example', view_func=RHExample)
+blueprint.add_url_rule('/test', 'test', view_func=RHTest)
