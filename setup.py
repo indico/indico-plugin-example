@@ -1,10 +1,10 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 
 setup(
     name='indico_example',
     version='0.1',
-    packages=['indico_example'],
+    packages=find_packages(),
     zip_safe=False,
     include_package_data=True,
     platforms='any',
