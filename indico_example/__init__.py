@@ -7,9 +7,6 @@ from MaKaC.webinterface.rh.base import RH
 from MaKaC.webinterface.pages.main import WPMainBase
 
 
-# TODO: database
-
-
 class SettingsForm(IndicoForm):
     dummy_message = StringField('Dummy Message')
     show_message = BooleanField('Show Message')

@@ -1,1 +1,2 @@
 graft indico_example/static
+graft indico_example/migrations
