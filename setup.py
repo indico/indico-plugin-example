@@ -9,7 +9,7 @@ setup(
     include_package_data=True,
     platforms='any',
     install_requires=[
-        'indico>=1.9'
+        'indico>=1.9.1'
     ],
     entry_points={'indico.plugins': {'example = indico_example:ExamplePlugin'}}
 )
