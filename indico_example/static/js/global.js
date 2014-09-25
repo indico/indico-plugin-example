@@ -1,3 +1,3 @@
 $(document).ready(function() {
-    $('body').prepend('global plugin js says hi');
+    $('body').append('global plugin js says hi');
 });
