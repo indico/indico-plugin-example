@@ -2,7 +2,7 @@ from flask_pluginengine import render_plugin_template, current_plugin, with_plug
 from wtforms import StringField, BooleanField
 
 from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
-from indico.modules.rb.forms.base import IndicoForm
+from indico.web.forms.base import IndicoForm
 from MaKaC.webinterface.rh.base import RH
 from MaKaC.webinterface.pages.main import WPMainBase
 
