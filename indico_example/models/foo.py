@@ -4,7 +4,7 @@ from indico.util.string import return_ascii
 
 class Foo(db.Model):
     __tablename__ = 'foo'
-    __table_args__ = ({'schema': 'plugin_example'})
+    __table_args__ = {'schema': 'plugin_example'}
 
     id = db.Column(
         db.Integer,
