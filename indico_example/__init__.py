@@ -18,6 +18,7 @@ class ExamplePlugin(IndicoPlugin):
     An example plugin that demonstrates the capabilities of the new Indico plugin system.
     """
 
+    configurable = True
     settings_form = SettingsForm
 
     def init(self):
