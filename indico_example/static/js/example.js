@@ -1,3 +1,4 @@
 $(document).ready(function() {
-    $('#jsmsg').text('example js says hi')
+    var $t = $T.domain('example');
+    $('#jsmsg').text($t.gettext('example js says hi'));
 });

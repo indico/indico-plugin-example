@@ -4,6 +4,6 @@
 Example says hello.
 <div id="jsmsg"></div>
 <br>
-<img src="{{ url_for_plugin('example.static', filename='images/cat.jpg') }}" alt="meow">
+<img src="{{ url_for_plugin('example.static', filename='images/cat.jpg') }}" alt="meow" />
 <div class="foo"><div class="bar">hello world</div></div>
-<div class="moo"></div>
+<div class="moo">In my language that is: {% trans %}Hello world!{% endtrans %}</div>

@@ -1,6 +1,7 @@
 from flask_pluginengine import render_plugin_template, current_plugin, with_plugin_context
 from wtforms import StringField, BooleanField
 
+from indico.util.i18n import _, session_language
 from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
 from indico.web.forms.base import IndicoForm
 from MaKaC.webinterface.rh.base import RH
@@ -34,9 +35,10 @@ class ExamplePlugin(IndicoPlugin):
         @with_plugin_context(self)
         def example():
             """Example command from example plugin"""
-            print 'example plugin says hi', current_plugin
-            if self.settings.get('show_message'):
-                print self.settings.get('dummy_message')
+            with session_language('es_ES'):
+                print _('example plugin says hi'), current_plugin
+                if self.settings.get('show_message'):
+                    print self.settings.get('dummy_message')
 
     def extend_shell_context(self, add_to_context):
         add_to_context('bar', name='foo', doc='foobar from example plugin', color='magenta!')
