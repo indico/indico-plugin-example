@@ -15,9 +15,8 @@ msgstr ""
 
 #: indico_example/__init__.py:39
 msgid "example plugin says hi"
-msgstr "la gente esta muy loca"
+msgstr ""
 
 #: indico_example/templates/example.html:9
 msgid "Hello world!"
 msgstr "¡Hola mundo!"
-

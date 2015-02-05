@@ -1,15 +1,25 @@
 @import "base/palette";
+@import "base/typography";
 
-.foo {
-    background-color: $dark-yellow;
-
-    .bar {
-        color: #f00 !important;
-        font-size: 24px;
-    }
+.content {
+    padding: 1em;
 }
 
-.moo {
-    background-color: #ddffdd;
-    height: 541px;
+.css-styles, .i18n-area, .data-area {
+    padding: 1em;
+
+    h2 {
+        font-size: 1.5em;
+        background-color: $light-gray;
+        display: inline-block;
+    }
+
+    .inverted {
+        background: $black;
+        color: $light-gray;
+    }
+
+    #yes-msg, #js-msg {
+        font-style: italic;
+    }
 }

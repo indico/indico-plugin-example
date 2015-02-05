@@ -1,4 +1,5 @@
 $(document).ready(function() {
     var $t = $T.domain('example');
-    $('#jsmsg').text($t.gettext('example js says hi'));
+    $('#js-msg').text($t.gettext('This message was generated using JavaScript'));
+    $('#yes-msg').text($T.gettext('Edit'));
 });

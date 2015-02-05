@@ -1,9 +1,29 @@
 {{ include_plugin_js_assets('example_js') }}
 {{ include_plugin_css_assets('example_css') }}
 
-Example says hello.
-<div id="jsmsg"></div>
-<br>
-<img src="{{ url_for_plugin('example.static', filename='images/cat.jpg') }}" alt="meow" />
-<div class="foo"><div class="bar">hello world</div></div>
-<div class="moo">In my language that is: {% trans %}Hello world!{% endtrans %}</div>
+<div class="content">
+    <h1>Example Plugin</h1>
+
+    <img src="{{ url_for_plugin('example.static', filename='images/flying_fish.jpg') }}" alt="meow" style="float: right; width: 400px; margin-right: 100px;"/>
+    <div class="data-area">
+        <h2>Data</h2>
+        <p>
+        You are <strong>{{ session.user.getFullName() }}</strong>.
+        </p>
+    </div>
+    <div class="css-styles">
+        <h2>CSS Styles</h2>
+        <p>
+        Are <span class="inverted">properly taken care of</span>.
+        </p>
+    </div>
+    <div class="i18n-area">
+        <h2>Internationalisation</h2>
+        <ul>
+            <li>The current language is <strong>{{ language }}</strong></li>
+            <li class="moo">In the currently set language ({{ language }}) we say: {% trans %}Hello world!{% endtrans %}</li>
+            <li id="js-msg"></li>
+            <li>And the following should be "Edit" in {{ language }}: <span id="yes-msg">?</span></li>
+        </ul>
+    </div>
+</div>
