@@ -1,11 +1,16 @@
 from flask_pluginengine import render_plugin_template, current_plugin, with_plugin_context
 from wtforms import StringField, BooleanField
 
-from indico.util.i18n import _, session_language, get_current_locale, IndicoLocale
+from indico.util.i18n import session_language, get_current_locale, IndicoLocale, make_bound_gettext, make_bound_ngettext
+from indico.util.i18n import gettext as core_gettext
 from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
 from indico.web.forms.base import IndicoForm
 from MaKaC.webinterface.rh.base import RH
 from MaKaC.webinterface.pages.main import WPMainBase
+
+
+gettext = _ = make_bound_gettext('example')
+ngettext = make_bound_ngettext('example')
 
 
 class SettingsForm(IndicoForm):
@@ -56,8 +61,10 @@ blueprint = IndicoPluginBlueprint('example', __name__)
 class WPExample(WPMainBase):
     def _getBody(self, params):
         locale = get_current_locale()
-        params.update(language=IndicoLocale.parse('en').languages[locale.language])
-        return render_plugin_template('example.html', **params)
+        params['language'] = IndicoLocale.parse('en').languages[locale.language]
+        params['python_msg_core_i18n'] = core_gettext('Hello world!')
+        params['python_msg_plugin_i18n'] = _('Hello world!')
+        return render_plugin_template('example:example.html', **params)
 
 
 class RHExample(RH):

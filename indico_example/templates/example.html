@@ -24,6 +24,9 @@
             <li class="moo">In the currently set language ({{ language }}) we say: {% trans %}Hello world!{% endtrans %}</li>
             <li id="js-msg"></li>
             <li>And the following should be "Edit" in {{ language }}: <span id="yes-msg">?</span></li>
+            <li>Message from python (core i18n): {{ python_msg_core_i18n }}</li>
+            <li>Message from python (plugin i18n): {{ python_msg_plugin_i18n }}</li>
+            <li>Message from jinja (context i18n): {% trans %}Hello world!{% endtrans %}</li>
         </ul>
     </div>
 </div>
