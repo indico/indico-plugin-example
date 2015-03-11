@@ -7,7 +7,7 @@ Internationalization of Indico plugins is fully supported and, like Indico, reli
 Onced you've finished developing your plugin, in order to extract plugin strings to be translated:
 
 ```console
-$ pybabel extract -o indico_example/translations/messages.pot indico_example -k '$T' -F babel.cfg
+$ pybabel extract -o indico_example/translations/messages.pot indico_example -F babel.cfg
 $ pybabel extract -o indico_example/translations/messages-js.pot indico_example --no-default-keywords -k '$T' -F babel-js.cfg
 ```
 
