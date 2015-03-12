@@ -8,7 +8,7 @@ Onced you've finished developing your plugin, in order to extract plugin strings
 
 ```console
 $ pybabel extract -o indico_example/translations/messages.pot indico_example -F babel.cfg
-$ pybabel extract -o indico_example/translations/messages-js.pot indico_example --no-default-keywords -k '$T' -F babel-js.cfg
+$ pybabel extract -o indico_example/translations/messages-js.pot indico_example --no-default-keywords -k 'gettext' -k 'ngettext:1,2' -k '$T' -F babel-js.cfg
 ```
 
 Then in order to add a new language (in this case, `de_DE`):
