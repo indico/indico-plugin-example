@@ -3,13 +3,13 @@ from setuptools import setup, find_packages
 
 setup(
     name='indico_example',
-    version='0.1',
+    version='0.3',
     packages=find_packages(),
     zip_safe=False,
     include_package_data=True,
     platforms='any',
     install_requires=[
-        'indico>=1.9.1'
+        'indico>=1.9.3'
     ],
     entry_points={'indico.plugins': {'example = indico_example:ExamplePlugin'}}
 )

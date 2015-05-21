@@ -1,6 +1,7 @@
 from flask_pluginengine import render_plugin_template, current_plugin, with_plugin_context
 from wtforms import StringField, BooleanField
 
+from indico.core import signals
 from indico.util.i18n import session_language, get_current_locale, IndicoLocale, make_bound_gettext, make_bound_ngettext
 from indico.util.i18n import gettext as core_gettext
 from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
@@ -31,6 +32,7 @@ class ExamplePlugin(IndicoPlugin):
         super(ExamplePlugin, self).init()
         self.inject_css('global_css')
         self.inject_js('global_js')
+        self.connect(signals.plugin.shell_context, self._extend_shell_context)
 
     def get_blueprints(self):
         return blueprint
@@ -45,8 +47,11 @@ class ExamplePlugin(IndicoPlugin):
                 if self.settings.get('show_message'):
                     print self.settings.get('dummy_message')
 
-    def extend_shell_context(self, add_to_context):
+    def _extend_shell_context(self, sender, add_to_context, add_to_context_multi, **kwargs):
         add_to_context('bar', name='foo', doc='foobar from example plugin', color='magenta!')
+        from flask import render_template
+        add_to_context(render_template, color='magenta!')
+        add_to_context(render_template_string, color='magenta!')
 
     def register_assets(self):
         self.register_js_bundle('example_js', 'js/example.js')
