@@ -49,7 +49,7 @@ class ExamplePlugin(IndicoPlugin):
 
     def _extend_shell_context(self, sender, add_to_context, add_to_context_multi, **kwargs):
         add_to_context('bar', name='foo', doc='foobar from example plugin', color='magenta!')
-        from flask import render_template
+        from flask import render_template, render_template_string
         add_to_context(render_template, color='magenta!')
         add_to_context(render_template_string, color='magenta!')
 
