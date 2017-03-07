@@ -1,13 +1,15 @@
+from flask import current_app
 from flask_pluginengine import render_plugin_template, current_plugin, with_plugin_context
 from wtforms import StringField, BooleanField
 
+from indico.cli.core import cli_command, cli_group
 from indico.core import signals
 from indico.util.i18n import session_language, get_current_locale, IndicoLocale, make_bound_gettext, make_bound_ngettext
 from indico.util.i18n import gettext as core_gettext
 from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
 from indico.web.forms.base import IndicoForm
-from MaKaC.webinterface.rh.base import RH
-from MaKaC.webinterface.pages.main import WPMainBase
+from indico.legacy.webinterface.rh.base import RH
+from indico.legacy.webinterface.pages.main import WPMainBase
 
 
 gettext = _ = make_bound_gettext('example')
@@ -33,19 +35,36 @@ class ExamplePlugin(IndicoPlugin):
         self.inject_css('global_css')
         self.inject_js('global_js')
         self.connect(signals.plugin.shell_context, self._extend_shell_context)
+        self.connect(signals.plugin.cli, self._add_cli)
 
     def get_blueprints(self):
         return blueprint
 
-    def add_cli_command(self, manager):
-        @manager.command
-        @with_plugin_context(self)
+    def _add_cli(self, sender):
+        @cli_command()
         def example():
             """Example command from example plugin"""
-            with session_language('es_ES'):
-                print _('example plugin says hi'), current_plugin
-                if self.settings.get('show_message'):
-                    print self.settings.get('dummy_message')
+            with current_app.test_request_context():
+                with session_language('es_ES'):
+                    print _('example plugin says hi'), current_plugin
+                    if self.settings.get('show_message'):
+                        print self.settings.get('dummy_message')
+
+        @cli_group(invoke_without_command=True)
+        def examples():
+            """Example group from example plugin"""
+            print 'root', current_plugin
+
+        @examples.command()
+        def a():
+            print 'a', current_plugin
+
+        @examples.command()
+        def b():
+            print 'b', current_plugin
+
+        yield example
+        yield examples
 
     def _extend_shell_context(self, sender, add_to_context, add_to_context_multi, **kwargs):
         add_to_context('bar', name='foo', doc='foobar from example plugin', color='magenta!')
