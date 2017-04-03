@@ -2,3 +2,5 @@ graft indico_example/static
 graft indico_example/migrations
 graft indico_example/templates
 graft indico_example/translations
+
+global-exclude *.pyc __pycache__ .keep
