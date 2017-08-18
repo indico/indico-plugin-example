@@ -1,5 +1,7 @@
+from __future__ import unicode_literals
+
 from flask import current_app
-from flask_pluginengine import render_plugin_template, current_plugin, with_plugin_context
+from flask_pluginengine import render_plugin_template, current_plugin
 from wtforms import StringField, BooleanField
 
 from indico.cli.core import cli_command, cli_group
@@ -29,6 +31,8 @@ class ExamplePlugin(IndicoPlugin):
 
     configurable = True
     settings_form = SettingsForm
+    default_settings = {'dummy_message': '',
+                        'show_message': False}
 
     def init(self):
         super(ExamplePlugin, self).init()
