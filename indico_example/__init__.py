@@ -10,8 +10,8 @@ from indico.util.i18n import session_language, get_current_locale, IndicoLocale,
 from indico.util.i18n import gettext as core_gettext
 from indico.core.plugins import IndicoPlugin, IndicoPluginBlueprint
 from indico.web.forms.base import IndicoForm
-from indico.legacy.webinterface.rh.base import RH
-from indico.legacy.webinterface.pages.main import WPMainBase
+from indico.web.rh import RH
+from indico.web.views import WPDecorated
 
 
 gettext = _ = make_bound_gettext('example')
@@ -86,7 +86,7 @@ class ExamplePlugin(IndicoPlugin):
 blueprint = IndicoPluginBlueprint('example', __name__)
 
 
-class WPExample(WPMainBase):
+class WPExample(WPDecorated):
     def _getBody(self, params):
         locale = get_current_locale()
         params['language'] = IndicoLocale.parse('en').languages[locale.language]
